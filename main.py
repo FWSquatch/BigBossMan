@@ -11,6 +11,12 @@ def get_creds():
         creds.append(line.rstrip())
     return creds
 
+# Initialize some stuff
+uname, pw, TOKEN = get_creds() # Get credentials for Discord and ImgFlip
+template = ['11','61520','Futurama Fry'] # Set a default template
+bot = commands.Bot(command_prefix='$', description='Virtual Mr Davis')
+bot.remove_command("help") # Remove default help command so I can use my own
+
 # Let us know when you are up
 @bot.event
 async def on_ready():
@@ -22,7 +28,7 @@ async def on_ready():
 # Help text 
 @bot.command()
 async def help(ctx):
-    embed = discord.Embed(title="Big Boss Man Bot", description="Virtual Mr Davis. He loves memes and can help answer a few questions. List of commands are:", color=0x76f211)
+    embed = discord.Embed(title="Big Boss Man Bot", description="Virtual Mr Davis. He loves meme! List of commands are:", color=0x76f211)
     embed.add_field(name="$memegame", value="Chooses a random meme for captioning", inline=True)
     embed.add_field(name='$caption "Text Box 1" "Text Box 2"', value="Provide text for the selected meme", inline=False)
     await ctx.send(embed=embed)
@@ -40,12 +46,6 @@ async def memegame(ctx):
 async def caption(ctx,box1, box2):
     global template
     await ctx.send(meme.make_meme(uname, pw, template[1],box1,box2))
-
-# Initialize some stuff
-uname, pw, TOKEN = get_creds() # Get credentials for Discord and ImgFlip
-template = ['11','61520','Futurama Fry'] # Set a default template
-bot = commands.Bot(command_prefix='$', description='Virtual Mr Davis')
-bot.remove_command("help") # Remove default help command so I can use my own
 
 # Let's start this party!
 bot.run(TOKEN)
