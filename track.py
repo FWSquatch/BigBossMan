@@ -28,11 +28,15 @@ def get_due_date():
     return dueDateCell
 
 # Check for student's assignments
-def check_student(name):
-    data = get_data()  
-    dueDate = data[0][get_due_date()]
-    response = "The next due date is: " + dueDate
-    for row in data:
-        if name.capitalize() in row: # If first or last name in the row, then respond
-            response += "\n" + row[1] + " " + row[0] + " must complete " + row[2] + " " + row[4]
+def check_student(name = "You must supply a name!"):
+    response = ""
+    if name != "null":
+        data = get_data()  
+        dueDate = data[0][get_due_date()]
+        response = "The next due date is: " + dueDate
+        for row in data:
+            if name.capitalize() in row: # If first or last name in the row, then respond
+                response += "\n" + row[1] + " " + row[0] + " must complete " + row[2] + " " + row[4]
+    else:
+        response = 'You must supply a name!'
     return response

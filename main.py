@@ -37,7 +37,7 @@ async def help(ctx):
 
 # Get TestOut Assignment
 @bot.command()
-async def testout(ctx,name):
+async def testout(ctx,name="null"):
     await ctx.send(track.check_student(name))
 
 # Play the meme game
