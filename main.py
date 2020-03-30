@@ -2,6 +2,7 @@
 import discord
 from discord.ext import commands
 import meme
+import track
 
 # Get credentials from creds.cfg file
 def get_creds():
@@ -29,9 +30,15 @@ async def on_ready():
 @bot.command()
 async def help(ctx):
     embed = discord.Embed(title="Big Boss Man Bot", description="Virtual Mr Davis. He loves meme! List of commands are:", color=0x76f211)
-    embed.add_field(name="$memegame", value="Chooses a random meme for captioning", inline=True)
+    embed.add_field(name='$testout "Name"', value="Tells a student what TestOut section must be completed that week", inline=False)
+    embed.add_field(name="$memegame", value="Chooses a random meme for captioning", inline=False)
     embed.add_field(name='$caption "Text Box 1" "Text Box 2"', value="Provide text for the selected meme", inline=False)
     await ctx.send(embed=embed)
+
+# Get TestOut Assignment
+@bot.command()
+async def testout(ctx,name):
+    await ctx.send(track.check_student(name))
 
 # Play the meme game
 @bot.command()
